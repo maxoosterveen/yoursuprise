@@ -38,6 +38,10 @@ const IncidentSchema = mongoose.Schema({
     type: Number,
     required: false,
   },
+  type: {
+    type: String,
+    required: false,
+  },
   updatedAt: {
     type: Date,
     required: true,

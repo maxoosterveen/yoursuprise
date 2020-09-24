@@ -7,34 +7,38 @@ router.get('/', async (req, res, next) => {
   try {
     const { start, category } = req.query;
 
-    const incidentsFilter = {
-      $and: [
-        {
-          $or: [
-            {
-              stop: {
-                $gte: start,
+    let incidentsFilter = {};
+
+    if (start) {
+      incidentsFilter = {
+        $and: [
+          {
+            $or: [
+              {
+                stop: {
+                  $gte: start,
+                },
               },
-            },
-            {
-              stop: null,
-            },
-          ],
-        },
-        {
-          $or: [
-            {
-              start: {
-                $lte: start,
+              {
+                stop: null,
               },
-            },
-            {
-              start: null,
-            },
-          ],
-        },
-      ],
-    };
+            ],
+          },
+          {
+            $or: [
+              {
+                start: {
+                  $lte: start,
+                },
+              },
+              {
+                start: null,
+              },
+            ],
+          },
+        ],
+      };
+    }
 
     const incidents = await Incident.find(incidentsFilter)
       .select('-__v')

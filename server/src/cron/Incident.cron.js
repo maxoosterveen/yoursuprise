@@ -5,18 +5,17 @@ const Incident = require('../models/Incident.model');
 require('dotenv').config();
 
 const updateNotUpdatedIncidents = async (updatedAt) => {
+  const incidentFilter = {
+    updatedAt: { $lt: updatedAt },
+    stop: null,
+  };
+
   try {
-    await Incident.updateMany(
-      {
-        updatedAt: { $lt: updatedAt },
-        stop: null,
-      },
-      {
-        stop: new Date(),
-        distance: null,
-        delay: null,
-      }
-    );
+    await Incident.updateMany(incidentFilter, {
+      stop: new Date(),
+      distance: null,
+      delay: null,
+    });
   } catch (error) {
     console.log(error.message);
   }
@@ -29,7 +28,7 @@ const updateOrCreateIncident = async (
   endRoute
 ) => {
   try {
-    const { id, category, road, start, stop, distance, delay } = incident;
+    const { id, category, road, start, stop, distance, delay, type } = incident;
 
     const incidentFilter = { ext_id: id };
 
@@ -43,6 +42,7 @@ const updateOrCreateIncident = async (
       stop,
       distance,
       delay,
+      type,
       updatedAt,
     };
 
@@ -59,7 +59,6 @@ const updateOrCreateIncident = async (
 };
 
 const fetchHandler = async () => {
-  console.log('fetchHandler has been called!');
   try {
     const {
       data: { roads },
@@ -75,6 +74,7 @@ const fetchHandler = async () => {
     console.log(error.message);
   }
 };
+
 
 const handleDataStuff = async () => {
   try {
