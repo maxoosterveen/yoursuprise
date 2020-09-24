@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const apiRouter = require('./api/Api.router');
-require('./schedule/Incident.schedule');
+require('./cron/Incident.cron');
 
 const app = express();
 

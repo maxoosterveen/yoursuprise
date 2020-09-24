@@ -8,8 +8,6 @@ import nl from "date-fns/locale/nl"
 import "react-datepicker/dist/react-datepicker.css";
 
 registerLocale('nl', nl);
-
-
 const Incidents = () => {
   const [incidents, setIncidents] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
