@@ -14,6 +14,14 @@ const IncidentSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  startRoute: {
+    type: String,
+    required: false,
+  },
+  endRoute: {
+    type: String,
+    required: false,
+  },
   start: {
     type: Date,
     required: false,

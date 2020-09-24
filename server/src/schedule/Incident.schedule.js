@@ -4,11 +4,11 @@ const Incident = require('../models/Incident.model');
 
 require('dotenv').config();
 
-const updateOldIncidents = async (updatedAt) => {
+const updateNotUpdatedIncidents = async (updatedAt) => {
   try {
-    const incidents = await Incident.updateMany(
+    await Incident.updateMany(
       {
-        updatedAt: { $lte: updatedAt },
+        updatedAt: { $lt: updatedAt },
         stop: null,
       },
       {
@@ -22,7 +22,12 @@ const updateOldIncidents = async (updatedAt) => {
   }
 };
 
-const updateOrCreateIncident = async (incident, updatedAt) => {
+const updateOrCreateIncident = async (
+  incident,
+  updatedAt,
+  startRoute,
+  endRoute
+) => {
   try {
     const { id, category, road, start, stop, distance, delay } = incident;
 
@@ -32,6 +37,8 @@ const updateOrCreateIncident = async (incident, updatedAt) => {
       ext_id: id,
       category,
       road,
+      startRoute,
+      endRoute,
       start,
       stop,
       distance,
@@ -79,17 +86,25 @@ const handleDataStuff = async () => {
       const { segments } = roadObject;
 
       segments.forEach((segment) => {
-        const { roadworks, jams } = segment;
+        const {
+          roadworks = [],
+          jams = [],
+          start: startRoute,
+          end: endRoute,
+        } = segment;
 
-        if (roadworks)
-          roadworks.forEach((roadwork) =>
-            updateOrCreateIncident(roadwork, updatedAt)
-          );
-        if (jams) jams.forEach((jam) => updateOrCreateIncident(jam, updatedAt));
+        const incidents = [];
+
+        incidents.push.apply(incidents, roadworks);
+        incidents.push.apply(incidents, jams);
+
+        incidents.forEach((incident) =>
+          updateOrCreateIncident(incident, updatedAt, startRoute, endRoute)
+        );
       });
     });
 
-    updateOldIncidents(updatedAt);
+    updateNotUpdatedIncidents(updatedAt);
   } catch (error) {
     console.log(error.message);
   }

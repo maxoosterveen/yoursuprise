@@ -1,53 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {createUseStyles} from 'react-jss'
 
-import DatePicker from 'react-datepicker';
+import IncidentCard from './IncidentCard';
+
+import DatePicker, { registerLocale } from 'react-datepicker';
+import nl from "date-fns/locale/nl"
 import "react-datepicker/dist/react-datepicker.css";
 
-// import IncidentsDateFilter from './IncidentsDateFilter';
-import IncidentsTable from './IncidentsTable';
+registerLocale('nl', nl);
+
 
 const Incidents = () => {
   const [incidents, setIncidents] = useState([]);
-  const [startDate, setStartDate] = useState(new Date().setHours(new Date().getHours() - 1));
-  const [endDate, setEndDate] = useState(new Date().setHours(new Date().getHours() + 1));
+  const [startDate, setStartDate] = useState(new Date());
 
-  async function fetchHandler() {
-    const { data } = await axios.get('/api/v1/incidents/jams');
+  const fetchHandler = async () => {
+    const { data } = await axios.get('/api/v1/incidents', {
+      params: {
+        start: startDate,
+        category: 'jams',
+      }
+    });
     setIncidents(data);
-  }
-
-
-  function filter(incidents){
-    return incidents.filter(incident => {
-      const incidentStartDate = new Date(incident.start);
-      const incidentEndDate = new Date(incident.start);
-
-      return true;
-    })
   }
 
   useEffect(() => {
     fetchHandler();
-  }, []);
+  }, [startDate]);
 
   return (
     <div>
       <DatePicker 
         selected={startDate} 
         onChange={date => setStartDate(date)}
-        showTimeInput 
-        dateFormat="MMMM d, yyyy h:mm" 
-      />
-      <DatePicker 
-        selected={endDate} 
-        onChange={date => setEndDate(date)}
-        showTimeInput 
-        dateFormat="d MMMM, yyyy h:mm" 
+        showTimeInput
+        locale="nl"
+        dateFormat="d MMMM, yyyy HH:mm" 
       />
       <div>
-        <IncidentsTable incidents={ filter(incidents) } />
+        {incidents.map((incident) => (
+          <IncidentCard incident={incident} key={incident.ext_id} />
+        ))}
       </div>
     </div>
   );
