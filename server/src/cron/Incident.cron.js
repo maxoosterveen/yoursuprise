@@ -1,5 +1,4 @@
 const axios = require('axios');
-const cron = require('node-cron');
 const Incident = require('../models/Incident.model');
 
 require('dotenv').config();
@@ -76,7 +75,8 @@ const fetchHandler = async () => {
 };
 
 
-const handleDataStuff = async () => {
+const handleFetchData = async () => {
+  console.log('handleDataStuff executed');
   try {
     const roads = await fetchHandler();
 
@@ -110,8 +110,4 @@ const handleDataStuff = async () => {
   }
 };
 
-handleDataStuff();
-// Run the above function every 5 minutes
-cron.schedule('*/5 * * * *', () => {
-  handleDataStuff();
-});
+module.exports = handleFetchData;
