@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   res.json({
-    message: 'Root API',
+    message: 'Root of the API',
   });
 });
 

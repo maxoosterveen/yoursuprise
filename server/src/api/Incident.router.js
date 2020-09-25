@@ -4,19 +4,22 @@ const Incident = require('../models/Incident.model');
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
+  console.log('Incident router has been called');
   try {
     const { start, category } = req.query;
 
     let incidentsFilter = {};
 
     if (start) {
+      const startDate = new Date(start);
       incidentsFilter = {
+        ...incidentsFilter,
         $and: [
           {
             $or: [
               {
                 stop: {
-                  $gte: start,
+                  $gte: startDate,
                 },
               },
               {
@@ -28,7 +31,7 @@ router.get('/', async (req, res, next) => {
             $or: [
               {
                 start: {
-                  $lte: start,
+                  $lte: startDate,
                 },
               },
               {
@@ -38,6 +41,10 @@ router.get('/', async (req, res, next) => {
           },
         ],
       };
+    }
+
+    if (category) {
+      incidentsFilter = { ...incidentsFilter, category };
     }
 
     const incidents = await Incident.find(incidentsFilter)
