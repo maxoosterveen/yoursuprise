@@ -12,10 +12,9 @@ In the project directory, you can run:
 
 ### `npm run dev`
 
-Runs the server in development mode.<br />
-The server will restart if you make edits.
+Runs the server in development mode. The server will restart if you make edits.
 
 ### `npm run start`
 
-Runs the server in production mode<br />
+Runs the server in production mode.
 
