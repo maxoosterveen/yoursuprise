@@ -22,6 +22,7 @@ const IncedentLabelStyled = styled('div')`
 
   > span {
     font-weight: bold;
+    font-size: 14px;
     margin: 0 5px;
   }
   > img {
@@ -30,10 +31,6 @@ const IncedentLabelStyled = styled('div')`
   }
 
 `;
-
-// base = yellow
-// succes = green
-// error = red
 
 const IncidentLabel = ({label, variant}) => {
   return (

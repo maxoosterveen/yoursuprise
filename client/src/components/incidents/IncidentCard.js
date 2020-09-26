@@ -43,8 +43,9 @@ const RoadName = styled.div`
   justify-content: center;
 
   > span {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
+    padding: 0 10px;
     color: #fff;
   }
 `;
