@@ -23,7 +23,7 @@ See the [client](./client) folder for more info about the front-end.
 Having the server in development will load static build files from React. <br>
 This means you do not have to start the react app seperate, but it is possible.
 
-## API CALLS
+# API CALLS
 
 ```http
 GET /api/v1/incidents
