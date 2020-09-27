@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## package.json
+
+Make sure the proxy in package.json is the same URL as the server.
+
 ## Available Scripts
 
 In the project directory, you can run:
