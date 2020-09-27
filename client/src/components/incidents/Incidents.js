@@ -26,13 +26,12 @@ const IncedentCategoryFilter = styled.button`
   cursor: pointer;
 `;
 
-const IncedentCategoryFilterActive = css`
-  background: red;
-`
-
-const datePickerStyles = css`
-  color: red;
-  background: green;
+const DatePickerWrapper = styled.div`
+  text-align: center;
+  margin: 15px 0;
+  .react-datepicker__input-container > input {
+    padding: 15px 10px;
+  }
 `
 
 
@@ -60,20 +59,19 @@ const Incidents = () => {
 
   return (
     <div>
-      <div>
+      <DatePickerWrapper>
         <DatePicker
           selected={startDate} 
           onChange={date => setStartDate(date)}
           showTimeInput
           locale="nl"
-          popperClassName={datePickerStyles}
           dateFormat="d MMMM, yyyy HH:mm" 
         />
-      </div>
+      </DatePickerWrapper>
       <IncedentCategoryFilterWrapper>
         <IncedentCategoryFilter onClick={changeCategory}>Alles</IncedentCategoryFilter>
-        <IncedentCategoryFilter data-category='jams' onClick={changeCategory}>Files</IncedentCategoryFilter>
-        <IncedentCategoryFilter data-category='roadworks' onClick={changeCategory}>Werkzaamheden</IncedentCategoryFilter>
+        <IncedentCategoryFilter onClick={changeCategory} data-category='jams'>Files</IncedentCategoryFilter>
+        <IncedentCategoryFilter onClick={changeCategory} data-category='roadworks'>Werkzaamheden</IncedentCategoryFilter>
       </IncedentCategoryFilterWrapper>
       <div>
         {incidents.map((incident) => (

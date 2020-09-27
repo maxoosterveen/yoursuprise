@@ -75,6 +75,7 @@ const fetchHandler = async () => {
 };
 
 const handleFetchData = async () => {
+  console.log(`handleFetchData has been called on ${new Date()}`);
   try {
     const roads = await fetchHandler();
 
