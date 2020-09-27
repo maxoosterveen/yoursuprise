@@ -2,10 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cron = require('node-cron');
 const path = require('path');
+
 const middlewares = require('./middlewares');
-
 const apiRouter = require('./api/Api.router');
-
 const IncidentCronFn = require('./cron/Incident.cron');
 
 const app = express();
@@ -31,13 +30,13 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../../client/build')));
 }
 
-// append API router to default API url
+// append API router to base API url
 app.use('/api/v1', apiRouter);
 
 // Run the function when the server starts
 IncidentCronFn();
 
-// Fetch the data every 5 minutes
+// Run the function every 5 minutes
 cron.schedule('*/5 * * * *', () => {
   IncidentCronFn();
 });
