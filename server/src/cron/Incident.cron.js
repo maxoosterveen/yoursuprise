@@ -38,7 +38,7 @@ const updateOrCreateIncident = async (
       type,
     } = incident;
 
-    const incidentFilter = { extId };
+    const incidentFilter = { extId, road };
 
     const incidentObject = {
       extId,

@@ -4,7 +4,6 @@ const IncidentSchema = mongoose.Schema({
   extId: {
     type: Number,
     required: true,
-    unique: true,
   },
   category: {
     type: String,
