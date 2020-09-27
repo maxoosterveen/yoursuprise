@@ -4,12 +4,12 @@ const Incident = require('../models/Incident.model');
 require('dotenv').config();
 
 const updateNotUpdatedIncidents = async (updatedAt) => {
-  const incidentFilter = {
-    updatedAt: { $lt: updatedAt },
-    stop: null,
-  };
-
   try {
+    const incidentFilter = {
+      updatedAt: { $lt: updatedAt },
+      stop: null,
+    };
+
     await Incident.updateMany(incidentFilter, {
       stop: new Date(),
       distance: null,
