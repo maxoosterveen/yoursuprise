@@ -11,3 +11,9 @@ Runs the server in development mode. The server will restart if you make edits. 
 Runs the server in production mode. <br>
 
 
+# .env
+
+## NODE_ENV
+### Development
+
+### Production
