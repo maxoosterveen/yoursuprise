@@ -74,7 +74,7 @@ const fetchHandler = async () => {
   }
 };
 
-const handleFetchData = async () => {
+const IncidentCronFn = async () => {
   console.log(`handleFetchData has been called on ${new Date()}`);
   try {
     const roads = await fetchHandler();
@@ -109,4 +109,4 @@ const handleFetchData = async () => {
   }
 };
 
-module.exports = handleFetchData;
+module.exports = IncidentCronFn;

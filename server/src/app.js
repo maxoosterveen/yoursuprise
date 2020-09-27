@@ -6,7 +6,7 @@ const middlewares = require('./middlewares');
 
 const apiRouter = require('./api/Api.router');
 
-const handleFetchData = require('./cron/Incident.cron');
+const IncidentCronFn = require('./cron/Incident.cron');
 
 const app = express();
 
@@ -35,11 +35,11 @@ if (process.env.NODE_ENV === 'production') {
 app.use('/api/v1', apiRouter);
 
 // Run the function when the server starts
-handleFetchData();
+IncidentCronFn();
 
 // Fetch the data every 5 minutes
 cron.schedule('*/5 * * * *', () => {
-  handleFetchData();
+  IncidentCronFn();
 });
 
 // Middlewares
