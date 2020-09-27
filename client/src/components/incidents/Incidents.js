@@ -5,7 +5,6 @@ import nl from "date-fns/locale/nl"
 import "react-datepicker/dist/react-datepicker.css";
 import IncidentCard from './IncidentCard';
 
-import css from '@emotion/css';
 import styled from '@emotion/styled';
 
 registerLocale('nl', nl);
