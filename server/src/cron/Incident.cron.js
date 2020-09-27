@@ -27,12 +27,12 @@ const updateOrCreateIncident = async (
   endRoute
 ) => {
   try {
-    const { id, category, road, start, stop, distance, delay, type } = incident;
+    const { id: ext_id, category, road, start, stop, distance, delay, type } = incident;
 
-    const incidentFilter = { ext_id: id };
+    const incidentFilter = { ext_id };
 
     const incidentObject = {
-      ext_id: id,
+      ext_id,
       category,
       road,
       startRoute,
@@ -93,11 +93,6 @@ const IncidentCronFn = async () => {
         } = segment;
 
         const incidents = [...roadworks, ...jams];
-
-        // const incidents = [];
-
-        // incidents.push.apply(incidents, roadworks);
-        // incidents.push.apply(incidents, jams);
 
         incidents.forEach((incident) =>
           updateOrCreateIncident(incident, updatedAt, startRoute, endRoute)
