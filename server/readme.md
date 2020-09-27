@@ -15,7 +15,7 @@ Runs the server in production mode. <br>
 
 ## NODE_ENV
 ### `NODE_ENV=development`
-Having the server in development mode will not load use the static build files from React. <br>
+Having the server in development mode will <b>not</b>not load the static build files from React. <br>
 This means you have to start the React app seperate. <br>
 See the [client](./client) folder for more info about the front-end.
 
