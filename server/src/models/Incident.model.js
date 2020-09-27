@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const IncidentSchema = mongoose.Schema({
-  ext_id: {
+  extId: {
     type: Number,
     required: true,
     unique: true,

@@ -47,7 +47,7 @@ const index = async (req, res, next) => {
       .select('-__v')
       .sort('road')
       .collation({
-        locale: 'en_US',
+        locale: 'nl',
         numericOrdering: true,
       });
 

@@ -27,12 +27,21 @@ const updateOrCreateIncident = async (
   endRoute
 ) => {
   try {
-    const { id: ext_id, category, road, start, stop, distance, delay, type } = incident;
+    const {
+      id: extId,
+      category,
+      road,
+      start,
+      stop,
+      distance,
+      delay,
+      type,
+    } = incident;
 
-    const incidentFilter = { ext_id };
+    const incidentFilter = { extId };
 
     const incidentObject = {
-      ext_id,
+      extId,
       category,
       road,
       startRoute,
