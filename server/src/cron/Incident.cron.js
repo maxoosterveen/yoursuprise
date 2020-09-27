@@ -92,10 +92,12 @@ const IncidentCronFn = async () => {
           end: endRoute,
         } = segment;
 
-        const incidents = [];
+        const incidents = [...roadworks, ...jams];
 
-        incidents.push.apply(incidents, roadworks);
-        incidents.push.apply(incidents, jams);
+        // const incidents = [];
+
+        // incidents.push.apply(incidents, roadworks);
+        // incidents.push.apply(incidents, jams);
 
         incidents.forEach((incident) =>
           updateOrCreateIncident(incident, updatedAt, startRoute, endRoute)
